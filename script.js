@@ -1,5 +1,15 @@
 // Get your free API key: https://aistudio.google.com/app/apikey
-const GEMINI_API_KEY = 'AIzaSyCpJhoHfd-ILgkht1zsJ5Cd_dubQ1OUjUs'; 
+
+// For CommonJS
+require('dotenv').config();
+
+// For ES Modules (import)
+import 'dotenv/config';
+
+console.log(process.env.PORT); // Outputs: 3000
+console.log(process.env.API_KEY); 
+
+const GEMINI_API_KEY = process.env.API_KEY;
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 const symptomsInput = document.getElementById('symptoms');
