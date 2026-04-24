@@ -3,8 +3,8 @@
 
 ### *Gentle AI coaching for better daily habits*
 
-[![Live Demo]](YOUR_VERCEL_URL_HERE)
-[![Devpost Submission]](YOUR_DEVPOST_URL_HERE)
+[![Live Demo]](https://remindri-hydration-wellness-agent.netlify.app/)
+
 
 ---
 
