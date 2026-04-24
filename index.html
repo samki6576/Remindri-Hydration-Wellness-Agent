@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Remindri · Hydration & Wellness Agent</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-blur"></div>
+  
+  <main class="glass-container">
+    <div class="logo-badge">
+      <span class="drop">💧</span>
+      <h1>Remindri</h1>
+    </div>
+    <p class="tagline">Your gentle wellness agent</p>
+
+    <div class="input-section">
+      <label for="symptoms">How are you feeling right now?</label>
+      <textarea 
+        id="symptoms" 
+        rows="3" 
+        placeholder="e.g., I feel tired, my head hurts a little, and my lips feel dry..."
+      ></textarea>
+      <button id="submitBtn" class="glass-btn">
+        <span>✨ Ask Remindri</span>
+      </button>
+    </div>
+
+    <div id="outputCard" class="output-card hidden">
+      <div class="output-header">
+        <span>🧠 Remindri suggests</span>
+      </div>
+      <div id="suggestionText" class="suggestion-text">
+        <!-- AI response will appear here -->
+      </div>
+      <div class="wellness-tip" id="wellnessTip">
+        <!-- Micro-habit will appear here -->
+      </div>
+      <button id="resetBtn" class="reset-btn">↻ New check-in</button>
+    </div>
+
+    <footer class="impact-footer">
+      <span>🌍 Small habits · Big impact</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
