@@ -26,6 +26,13 @@ exports.handler = async (event) => {
     
     const data = await response.json();
     
+    if (!response.ok) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Gemini API Error', details: data })
+      };
+    }
+    
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -34,7 +41,7 @@ exports.handler = async (event) => {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'AI service unavailable' })
+      body: JSON.stringify({ error: 'AI service unavailable', message: error.message })
     };
   }
 };
