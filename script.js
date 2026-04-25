@@ -27,14 +27,14 @@ async function getAIResponse(userInput) {
         systemPrompt: SYSTEM_PROMPT
       })
     });
-    
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       const geminiErrorMessage = errorData?.details?.error?.message || 'Unknown error';
       console.error('Server returned an error:', geminiErrorMessage, errorData);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json();
     if (!data.reply) {
       throw new Error('No reply from AI');
@@ -61,11 +61,11 @@ submitBtn.addEventListener('click', async () => {
   outputCard.classList.remove('hidden');
 
   const aiReply = await getAIResponse(userSymptoms);
-  
+
   const lines = aiReply.split('\n');
   let hydration = '';
   let microHabit = '';
-  
+
   for (let line of lines) {
     if (line.includes('💧') || line.toLowerCase().includes('hydration')) {
       hydration = line;
@@ -73,10 +73,10 @@ submitBtn.addEventListener('click', async () => {
       microHabit = line;
     }
   }
-  
+
   suggestionText.innerText = hydration || '💧 Sip 6-8 oz of water. Your body will thank you.';
   wellnessTipDiv.innerHTML = `🧘 ${microHabit.replace('🧘', '').trim() || 'Look away from screen for 20 seconds — blink slowly 5 times.'}`;
-  
+
   submitBtn.disabled = false;
   submitBtn.innerHTML = '<span>✨ Ask Remindri</span>';
 });
