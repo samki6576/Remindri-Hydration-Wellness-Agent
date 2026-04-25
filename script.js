@@ -28,7 +28,14 @@ async function getAIResponse(userInput) {
       })
     });
     
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     const data = await response.json();
+    if (!data.reply) {
+      throw new Error('No reply from AI');
+    }
     return data.reply;
   } catch (error) {
     console.error('AI error:', error);
