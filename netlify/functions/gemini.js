@@ -19,8 +19,8 @@ exports.handler = async (event) => {
       };
     }
 
-    // Using v1 stable endpoint for gemini-1.5-flash
-    const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    // Using gemini-pro as it is the most widely available legacy model
+    const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
     
     const payload = {
       contents: [{
@@ -37,12 +37,16 @@ exports.handler = async (event) => {
     const data = await response.json();
     
     if (!response.ok) {
+      // If we get a 404, let's try to list models to see what is available
+      const listResponse = await fetch(`https://generativelanguage.googleapis.com/v1/models?key=${GEMINI_API_KEY}`);
+      const listData = await listResponse.json().catch(() => ({}));
+
       return {
         statusCode: response.status,
         body: JSON.stringify({ 
           error: 'Gemini API Rejection', 
-          details: data,
-          message: data.error?.message || 'Unknown error from Google'
+          message: data.error?.message || 'Unknown error',
+          availableModels: listData.models?.map(m => m.name) || 'Could not list models'
         })
       };
     }
